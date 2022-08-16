@@ -22,6 +22,11 @@ const appRouter = trpc.router()
     .mutation('createProduct', {
         input: z.string(),
         resolve: ({ input }) => {
+            products.push({
+                id: products.length + 1,
+                name: input,
+                description: `Description ${input}`
+            })
             return `${input} created`;
         }
     })
