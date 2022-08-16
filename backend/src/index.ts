@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import * as trpc from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express'
 
@@ -12,6 +13,7 @@ const appRouter = trpc.router().query('hello', {
 
 export type AppRouter = typeof appRouter;
 
+app.use(cors());
 app.use('/trpc', trpcExpress.createExpressMiddleware({
     router: appRouter,
     createContext: () => null
